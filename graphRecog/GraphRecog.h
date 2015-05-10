@@ -3,13 +3,19 @@
 
 #include <opencv2/opencv.hpp>
 
+//! @brief Graph recognition
+//!
+//! Testing algorithms for graph recognition in images
+//! Will be ported to Java (Android)
+//!
+//! @author Attila Györkös
+//!
 class GraphRecog
 {
 
 public:
     GraphRecog(const cv::Mat& srcImg);
     ~GraphRecog(void);
-
 
     cv::Mat getBaseImg() const;
 
@@ -39,9 +45,8 @@ private:
     //! @brief Performs thinning
     //! Patterns in the source image are thinned to 1 Pixel. End points and
     //! pixel connectivity are preserved.
-    //! See:
+    //! Proposed by T.Y. Zhang and C.Y. Suen in
     //! "A fast parallel algorithm for thinning digital patterns"
-    //! T.Y. Zhang and C.Y. Suen
     //! Communications of the ACM, March 1984, Vol. 27, No. 2, Page 236
     //!
     //! @param srcImg Source image (size > 3x3 , 1 channel)

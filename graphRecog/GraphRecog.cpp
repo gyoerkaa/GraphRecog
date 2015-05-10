@@ -1,5 +1,5 @@
 #include "GraphRecog.h"
-#include "HoughTrans.h"
+//#include "HoughTrans.h" $(OPENCV_DIR)
 
 #include <algorithm>
 #include <iostream>
@@ -9,11 +9,21 @@
 
 GraphRecog::GraphRecog(const cv::Mat& srcImg)
 {
+    this->toBinary(srcImg, this->baseImg);
+    this->thinning(this->baseImg, this->baseImg);
+    this->detectGNodes(this->baseImg);
+    //this->detectGEdges(this->baseImg);
 }
 
 
 GraphRecog::~GraphRecog(void)
 {
+}
+
+
+cv::Mat GraphRecog::getBaseImg() const
+{
+    return this->baseImg;
 }
 
 
@@ -120,8 +130,8 @@ void GraphRecog::detectGNodes(const cv::Mat& srcImg)
     // Reduce the noise to avoid false circle detection
     //GaussianBlur(tmpImg, tmpImg, cv::Size(9, 9), 2, 2);
 
-    //HoughCircles(tmpImg, houghCircles, CV_HOUGH_GRADIENT, 1, srcImg.rows/8, cannyThreshold, accumulatorThreshold, 0, 0);
-    HoughTrans::myHoughCircles(tmpImg, houghCircles, 1, srcImg.rows/8, cannyThreshold, accumulatorThreshold, 0, 0);
+    HoughCircles(tmpImg, houghCircles, CV_HOUGH_GRADIENT, 1, srcImg.rows/8, cannyThreshold, accumulatorThreshold, 0, 0);
+    //HoughTrans::myHoughCircles(tmpImg, houghCircles, 1, srcImg.rows/8, cannyThreshold, accumulatorThreshold, 0, 0);
 
     // Calculate radius Median. Discard large/small circles.
     // We can assume that the nodes are of similar size. 
