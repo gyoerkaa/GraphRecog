@@ -44,8 +44,11 @@ static void myIcvHoughCirclesGradient(CvMat* img, float dp, float min_dist,
     //dy = cvCloneMat(img);
     
     /*
+    // We don't need canny, we use skeletonization
+
     edges = cvCreateMat( img->rows, img->cols, CV_8UC1);
     cvCanny( img, edges, MAX(canny_threshold/2,1), canny_threshold, 3 );
+
     */
     dx = cvCreateMat( img->rows, img->cols, CV_16SC1 );
     dy = cvCreateMat( img->rows, img->cols, CV_16SC1 );
@@ -68,6 +71,7 @@ static void myIcvHoughCirclesGradient(CvMat* img, float dp, float min_dist,
     acols = accum->cols - 2;
     adata = accum->data.i;
     astep = accum->step/sizeof(adata[0]);
+
     // Accumulate circle evidence for each edge pixel
     for( y = 0; y < rows; y++ )
     {

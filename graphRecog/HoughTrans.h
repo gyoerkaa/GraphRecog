@@ -3,6 +3,13 @@
 
 #include <opencv2/opencv.hpp>
 
+//! @brief Custom Hough Transformation
+//!
+//! Modified opencv Hough Transformation with
+//! Canny Filter removed. Using Skeletonization instead
+//!
+//!
+
 namespace HoughTrans
 {        
     void myHoughCircles(cv::InputArray _image, cv::OutputArray _circles,
